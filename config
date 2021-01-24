@@ -181,6 +181,10 @@ bindsym $mod+Shift+d exec rofi $rofiSwitch -show drun
 bindsym $mod+d exec rofi $rofiSwitch -show run
 bindsym $mod+m exec rofimoji
 
+# scratchpad
+bindsym $mod+equal move scratchpad
+bindsym $mod+minus scratchpad show
+
 # general init:
 exec xsettingsd
 exec polybar -r top
