@@ -182,7 +182,7 @@ bindsym $mod+d exec rofi $rofiSwitch -show run
 bindsym $mod+m exec rofimoji
 
 # scratchpad
-bindsym $mod+equal move scratchpad
+bindsym $mod+shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # general init:
