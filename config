@@ -195,6 +195,9 @@ exec xsettingsd
 exec polybar -r top
 exec xmodmap ~/.Xmodmap
 exec feh --bg-scale ~/Pictures/14093086091_5a257596d1_o.jpg
+exec picom
+exec dropbox start
+exec --no-startup-id dunst
 
 # theme:
 # class                 border  bground text    indicator child_border
