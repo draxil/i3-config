@@ -182,6 +182,7 @@ bindsym $mod+j mode "jump"
 
 # rofis
 bindsym $mod+Return exec rofi $rofiSwitch -show window
+bindsym $mod+L exec rofi $rofiSwitch -show window
 bindsym $mod+Shift+d exec rofi $rofiSwitch -show drun
 bindsym $mod+d exec rofi $rofiSwitch -show run
 bindsym $mod+m exec rofimoji
@@ -198,6 +199,7 @@ exec feh --bg-scale ~/Pictures/14093086091_5a257596d1_o.jpg
 exec picom
 exec dropbox start
 exec --no-startup-id dunst
+exec xfce4-screensaver
 
 # theme:
 # class                 border  bground text    indicator child_border
