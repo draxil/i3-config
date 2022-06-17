@@ -1,0 +1,6 @@
+{
+    "term": "alacritty",
+    "shells": {
+	"tmux": "tmux"
+    }
+}
