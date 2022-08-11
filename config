@@ -17,10 +17,8 @@ font pango:Hack 14
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
 exec ~/.screenlayout/std.sh
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xautolock -time 10 -locker blurlock
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -32,6 +30,11 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# trying these from manjaro
+default_border 1pixel
+default_floating_border normal
+hide_edge_borders none
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -94,7 +97,6 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "10"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -106,7 +108,7 @@ bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+
 
 bindsym $mod+period workspace next
 bindsym $mod+comma  workspace prev
@@ -121,7 +123,6 @@ bindsym $mod+Shift+6 move container to workspace number $ws6
 bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -159,43 +160,69 @@ bindsym $mod+Return exec rofi $rofiSwitch -show window
 #bindsym $mod+L exec rofi $rofiSwitch -show window
 bindsym $mod+Shift+d exec rofi $rofiSwitch -show drun
 bindsym $mod+d exec rofi $rofiSwitch -show run
-# temporary full path as $PATH isn't good for i3 and this just yet
-bindsym $mod+m exec /home/joe/.local/bin/rofimoji
 # quake-term-alike:
-bindsym $mod+o exec /home/joe/.local/bin/i3-quickterm tmux
+bindsym $mod+o exec i3-quickterm tmux
 
 # scratchpad
 bindsym $mod+shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
-bindsym $mod+grave exec ~/bin/scratchr
+bindsym $mod+grave exec ~/.local/bin/scratchr
+
+# trying this from manjaro, load sound:
+bindsym $mod+Ctrl+m exec pavucontrol
+
+
 # general init:
-exec xsettingsd
-exec polybar -r top
-exec xmodmap ~/.Xmodmap
-exec feh --bg-scale ~/Pictures/14093086091_5a257596d1_o.jpg
-exec picom
-exec dropbox start
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id pa-applet
+#exec xsettingsd
+exec --no-startup-id polybar -r top
+exec --no-startup-id xmodmap ~/.Xmodmap
+exec --no-startup-id nitrogen --restore; sleep 1; picom -b
+exec --no-startup-id nm-applet
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id pamac-tray
+exec --no-startup-id clipit
+exec --no-startup-id dropbox start
 exec --no-startup-id dunst
 exec redshift -c ~/.config/redshift/config
+exec_always --no-startup-id ff-theme-util
+exec_always --no-startup-id fix_xcursor
 
 # now sxhkbd does most of the keys!
 exec --no-startup-id sxhkd
-exec --no-startup-id xfce4-screensaver
+#exec --no-startup-id xfce4-screensaver
 
 # theme:
-# class                 border  bground text    indicator child_border
-client.focused          #222222 #222222 #F8F8F2 #FF0000   #6272A4
-client.focused_inactive #222222 #222222 #F8F8F2 #44475A   #44475A
-client.unfocused        #111111 #111111 #BFBFBF #282A36   #282A36
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
-client.background       #F8F8F2
+# # class                 border  bground text    indicator child_border
+# client.focused          #222222 #222222 #F8F8F2 #FF0000   #6272A4
+# client.focused_inactive #222222 #222222 #F8F8F2 #44475A   #44475A
+# client.unfocused        #111111 #111111 #BFBFBF #282A36   #282A36
+# client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+# client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+# client.background       #F8F8F2
+
+# at least temporarily using the i3 theme colours?
+# class                   border  backgr. text    indic.   child_border
+client.focused          #556064 #556064 #80FFF9 #FDF6E3
+client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
+client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
+client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
+client.placeholder      #000000 #0c0c0c #ffffff #000000 
+
+client.background       #2B2C2B
 
 
 ## START GAPS
-for_window [class=".*"] border pixel 1
-gaps inner 2 
-gaps outer 2
+#smart_gaps off
+smart_borders on
+gaps inner 14
+gaps outer -2
+
+# pre manj settings, deleteme if happy with the above
+# for_window [class=".*"] border pixel 1
+# gaps inner 2 
+# gaps outer 2
 #setsmart_borders no_gaps
 set $mode_gaps Gaps: (o)uter, (i)nner, (h)orizontal, (v)ertical, (t)op, (r)ight, (b)ottom, (l)eft
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
@@ -321,3 +348,80 @@ mode "$mode_gaps_left" {
 
 # window rules
 for_window [class="xpad"] floating enable
+#... from manjaro:
+for_window [title="alsamixer"] floating enable border pixel 1
+for_window [class="calamares"] floating enable border normal
+for_window [class="Clipgrab"] floating enable
+for_window [title="File Transfer*"] floating enable
+for_window [class="fpakman"] floating enable
+for_window [class="Galculator"] floating enable border pixel 1
+for_window [class="GParted"] floating enable border normal
+for_window [title="i3_help"] floating enable sticky enable border normal
+for_window [class="Lightdm-settings"] floating enable
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="Manjaro-hello"] floating enable
+for_window [class="Manjaro Settings Manager"] floating enable border normal
+for_window [title="MuseScore: Play Panel"] floating enable
+for_window [class="Nitrogen"] floating enable sticky enable border normal
+for_window [class="Oblogout"] fullscreen enable
+for_window [class="octopi"] floating enable
+for_window [title="About Pale Moon"] floating enable
+for_window [class="Pamac-manager"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="qt5ct"] floating enable sticky enable border normal
+for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
+for_window [class="Simple-scan"] floating enable border normal
+for_window [class="(?i)System-config-printer.py"] floating enable border normal
+for_window [class="Skype"] floating enable border normal
+for_window [class="Timeset-gui"] floating enable border normal
+for_window [class="(?i)virtualbox"] floating enable border normal
+for_window [class="Xfburn"] floating enable
+
+
+# # MAAAYBE??
+# bar {
+# 	i3bar_command i3bar
+# 	status_command i3status
+# 	position top
+
+# ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+# #	tray_output primary
+# 	tray_output HDMI-0
+
+# 	bindsym button4 nop
+# 	bindsym button5 nop
+# #   font xft:URWGothic-Book 11
+# 	strip_workspace_numbers yes
+
+#     colors {
+#         background #222D31
+#         statusline #F9FAF9
+#         separator  #454947
+
+# #                      border  backgr. text
+#         focused_workspace  #F9FAF9 #16a085 #292F34
+#         active_workspace   #595B5B #353836 #FDF6E3
+#         inactive_workspace #595B5B #222D31 #EEE8D5
+#         binding_mode       #16a085 #2C2C2C #F9FAF9
+#         urgent_workspace   #16a085 #FDF6E3 #E5201D
+#     }
+# }
+
+# hide/unhide i3status bar
+bindsym $mod+Mod1+m bar mode toggle
+
+bindsym $mod+0 mode "$mode_system"
+set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3exit lock, mode "default"
+    bindsym s exec --no-startup-id i3exit suspend, mode "default"
+    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
+    bindsym e exec --no-startup-id i3exit logout, mode "default"
+    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+
+    # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
