@@ -1,10 +1,8 @@
-# i3 config file (v4)
+# config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-
-set $rofiSwitch -theme gruvbox-dark-hard -font "hack 15"
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -156,10 +154,10 @@ set $defmode mode "default"
 
 # TODO: to the sxhkbd?
 # rofis
-bindsym $mod+Return exec rofi $rofiSwitch -show window
-#bindsym $mod+L exec rofi $rofiSwitch -show window
-bindsym $mod+Shift+d exec rofi $rofiSwitch -show drun
-bindsym $mod+d exec rofi $rofiSwitch -show run
+bindsym $mod+Return exec rofi -show window
+#bindsym $mod+L exec rofi -show window
+bindsym $mod+Shift+d exec rofi -show drun
+bindsym $mod+d exec rofi -show run
 # quake-term-alike:
 bindsym $mod+o exec i3-quickterm tmux
 
