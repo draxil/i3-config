@@ -126,8 +126,6 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 
 bindsym $mod+Mod1+Left resize shrink width 10 px or 10 ppt
@@ -363,7 +361,6 @@ for_window [class="Manjaro Settings Manager"] floating enable border normal
 for_window [title="MuseScore: Play Panel"] floating enable
 for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Oblogout"] fullscreen enable
-for_window [class="octopi"] floating enable
 for_window [title="About Pale Moon"] floating enable
 for_window [class="Pamac-manager"] floating enable
 for_window [class="Pavucontrol"] floating enable
@@ -375,36 +372,12 @@ for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
-
-
-# # MAAAYBE??
-# bar {
-# 	i3bar_command i3bar
-# 	status_command i3status
-# 	position top
-
-# ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-# #	tray_output primary
-# 	tray_output HDMI-0
-
-# 	bindsym button4 nop
-# 	bindsym button5 nop
-# #   font xft:URWGothic-Book 11
-# 	strip_workspace_numbers yes
-
-#     colors {
-#         background #222D31
-#         statusline #F9FAF9
-#         separator  #454947
-
-# #                      border  backgr. text
-#         focused_workspace  #F9FAF9 #16a085 #292F34
-#         active_workspace   #595B5B #353836 #FDF6E3
-#         inactive_workspace #595B5B #222D31 #EEE8D5
-#         binding_mode       #16a085 #2C2C2C #F9FAF9
-#         urgent_workspace   #16a085 #FDF6E3 #E5201D
-#     }
-# }
+for_window [class="Quodlibet"] floating enable resize set 1024 768
+for_window [class="teams-for-linux"] floating enable move scratchpad resize set 1024 768
+for_window [class="Slack"] floating enable  move scratchpad resize set 1024 768
+for_window [class="msoutlook-nativefier"] floating enable  move scratchpad resize set 1024 768
+# for some reason suddenly started having border "normal"?
+for_window [class="Alacritty"] border none
 
 # hide/unhide i3status bar
 bindsym $mod+Mod1+m bar mode toggle
