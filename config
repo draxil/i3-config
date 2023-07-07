@@ -31,7 +31,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 
 # trying these from manjaro
 default_border 1pixel
-default_floating_border normal
+default_floating_border 1pixel # was "normal", trying to fo fix sudden border plague
 hide_edge_borders none
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -166,6 +166,7 @@ bindsym $mod+o exec i3-quickterm tmux
 bindsym $mod+shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 bindsym $mod+grave exec ~/.local/bin/scratchr
+bindsym $mod+Tab exec ~/.local/bin/scratchr
 
 # trying this from manjaro, load sound:
 bindsym $mod+Ctrl+m exec pavucontrol
@@ -381,6 +382,7 @@ for_window [class="Slack"] floating enable  move scratchpad resize set 1024 768
 for_window [class="msoutlook-nativefier"] floating enable  move scratchpad resize set 1024 768
 # for some reason suddenly started having border "normal"?
 for_window [class="Alacritty"] border none
+for_window [class="TelegramDesktop"] floating enable
 
 # hide/unhide i3status bar
 bindsym $mod+Mod1+m bar mode toggle
