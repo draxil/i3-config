@@ -384,6 +384,7 @@ for_window [class="msoutlook-nativefier"] floating enable  move scratchpad resiz
 # for some reason suddenly started having border "normal"?
 for_window [class="Alacritty"] border none
 for_window [class="TelegramDesktop"] floating enable
+for_window [title="Emacs Everywhere"] floating enable
 
 # hide/unhide i3status bar
 bindsym $mod+Mod1+m bar mode toggle
